@@ -6,6 +6,7 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'calendar_date_select', '~> 1.16.3'
 
 
 # Gems used only for assets and not required
@@ -35,4 +36,16 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :test do
+  gem 'rspec-rails', '~> 2.8.1'
+  gem 'rspec'
+  gem 'syntax'
+  gem 'timecop', '~> 0.3.5'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails', '~> 1.2.1'
+  gem 'cucumber'
+  gem 'launchy'
+end
