@@ -1,0 +1,66 @@
+<img src="TKDwebLine.jpg" /><br><br>
+<h1>New student</h1>
+<% if flash[:error] %>
+  <div style="color: #FF0000;" >
+  	<% for error in flash[:error] %>
+		<%= error %> <br>
+	<% end %></div>
+<% end %>
+<% if flash[:notice] then %>
+	<p style="color: green;"><%= flash[:notice] %></p>
+<% end %>
+
+<% form_for(@student) do |f| %>
+ <table>
+ <tr>	 
+  <td><b><%= f.label :first_name%>:</td>
+  <td><%= f.text_field :first_name%></td>
+ </tr>
+ 
+ <tr> 
+  <td><b><%= f.label :last_name%>:</td>
+  <td><%= f.text_field :last_name %></td>
+</tr>
+  
+<tr>  
+  <td><b><%= label_tag("School:") %></td>
+  <td><%= collection_select(:student, :school_id, School.find(:all, :order => "name"), :id, :name, {:prompt => "Select School"}) %></td>
+</tr>
+
+<tr>  
+  <td><b><%= f.label :rank%>:</td>
+  <td><%= f.select("rank",  GupNames.for_html_select)%></td>
+</tr>
+
+<tr>  
+  <td><b><%= f.label :last_test%>:</b></td>
+  <td><%= f.date_select :last_test %></td>
+</tr>
+
+<tr>  
+  <td><b><%= f.label :email_address%>:</td>
+  <td><%= f.text_field :email_address%></td>
+</tr>
+  
+<tr>  
+  <td><b><%= f.label :phone%>:</td>
+  <td><%= f.text_field :phone%></td>
+</tr>
+
+ <tr>
+  <td><b><%= f.label("Secondary Phone")%>:</td>
+  <td><%= f.text_field :phone_two%></td>
+ </tr>
+ 
+ <tr>
+  <td><b><%= f.label("Parent Name")%>:</td>
+  <td><%= f.text_field :parent_name%></td>
+ </tr>
+</table> 
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', students_path %>

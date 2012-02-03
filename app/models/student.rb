@@ -10,6 +10,8 @@ class Student < ActiveRecord::Base
   
   validates_presence_of :first_name, :last_name, :school_id, :rank
   
+  scope :active, where(:inactive => false)
+  
   def classes_needed_to_test()
     delta_classes = number_of_classes_since_last_test()
     remaining_classes = TestingRequirements.by_gup[rank - 1]["classes"] - delta_classes

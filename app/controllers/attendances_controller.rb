@@ -45,23 +45,18 @@ class AttendancesController < ApplicationController
   # POST /attendances
   # POST /attendances.xml
   def create
-    @students = Student.find(:all, :conditions => "inactive = 'f'", :order => "last_name")
-    @students.each { |student|
+    @students = Student.active.order('last_name')
+    @students.each do |student|
       num_classes = 0
       params["student#{student.id}"].each {|key, value|
         num_classes += value.to_i();
       }
-      if (num_classes > 0) 
-        student.attendances << Attendance.new(:number_of_classes => num_classes,
-                                              :date => Date.today)
-        student.save
-      end
-      
-    }
- 
+      student.attendances.create :number_of_classes => num_classes if num_classes > 0
+    end
+    
     respond_to do |format|
-        flash.now[:notice] = 'Attendance was successfully created.'
-        format.html { render "done" }
+      flash.now[:notice] = 'Attendance was successfully created.'
+      format.html { render "done" }
     end
   end
 

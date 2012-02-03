@@ -1,9 +1,10 @@
 class Attendance < ActiveRecord::Base
   belongs_to :student
   
-  def after_initialize
-    if @date == nil then
-      @date = Date.today
+  after_initialize :assign_default_date
+  
+  protected
+    def assign_default_date
+      self.date ||= Date.today
     end
-  end
 end

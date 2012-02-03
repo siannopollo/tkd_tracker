@@ -1,0 +1,14 @@
+<img src="TKDwebLine.jpg" /><br>
+<h1>New school</h1>
+
+<% form_for(@school) do |f| %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', schools_path %>

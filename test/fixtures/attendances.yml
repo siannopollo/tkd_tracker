@@ -1,2 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
+one:
+  student_id: 1
+  number_of_classes: 2
+  date: <%= Date.today %>
+  

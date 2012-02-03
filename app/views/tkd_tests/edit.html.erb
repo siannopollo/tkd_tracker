@@ -1,0 +1,11 @@
+<img src="TKDwebLine.jpg" /><br>
+<h1>Editing test</h1>
+
+<% form_for(@test) do |f| %>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @test %> |
+<%= link_to 'Back', tkd_tests_path %>

@@ -1,6 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   first_name: Bobby
   last_name: Jones
   rank: 10
@@ -8,3 +9,4 @@ one:
   email_address: bobby@example.com
   phone: 
   school_id: 1
+  inactive: f
