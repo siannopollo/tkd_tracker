@@ -36,7 +36,7 @@ gem 'mootools-rails'
 # gem 'capistrano'
 
 # To use debugger
-gem 'ruby-debug19', :require => 'ruby-debug'
+# gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test do
   gem 'rspec-rails', '~> 2.8.1'
