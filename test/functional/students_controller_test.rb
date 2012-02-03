@@ -1,6 +1,8 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class StudentsControllerTest < ActionController::TestCase
+  fixtures :schools, :students
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -14,7 +16,10 @@ class StudentsControllerTest < ActionController::TestCase
 
   test "should create student" do
     assert_difference('Student.count') do
-      post :create, :student => { }
+      post :create, :student => {
+        :first_name => 'Jim', :last_name => 'Jones',
+        :rank => 10, :school_id => schools(:one).id
+      }
     end
 
     assert_redirected_to student_path(assigns(:student))

@@ -4,9 +4,11 @@ require 'testing_requirements'
 class Student < ActiveRecord::Base
   has_many :attendances, :order => 'date DESC'
   has_many :tests, :class_name => 'TkdTest', :order => 'date DESC'
-  has_one :school
+  belongs_to :school
   
   after_initialize :assign_default_last_test_date
+  
+  validates_presence_of :first_name, :last_name, :school_id, :rank
   
   def classes_needed_to_test()
     delta_classes = number_of_classes_since_last_test()

@@ -1,10 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  id: 
-  first_name:
-  last_name:
-  rank: 
-  last_test:
-  email_address: 
+  first_name: Bobby
+  last_name: Jones
+  rank: 10
+  last_test: <%= Date.today %>
+  email_address: bobby@example.com
   phone: 
+  school_id: 1
