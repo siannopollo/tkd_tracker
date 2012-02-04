@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+school = School.create :name => "Bob's TKD"
+
+student = school.students.create({
+  :first_name => 'Bobby', :last_name => 'Jones',
+  :email_address => 'bobby@example.com'
+})
+
+student.attendances.create :date => Date.yesterday, :number_of_classes => 2

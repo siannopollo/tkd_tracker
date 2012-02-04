@@ -6,8 +6,8 @@ class AttendancesController < ApplicationController
   # GET /attendances
   # GET /attendances.xml
   def index
-    @opendoor_students = Student.find(:all, :conditions => "school_id = 1 and inactive = 'f'", :order => "last_name")
-    @fairview_students = Student.find(:all, :conditions => "school_id = 2 and inactive = 'f'", :order => "last_name")
+    @opendoor_students = Student.active.find(:all, :conditions => "school_id = 1", :order => "last_name")
+    @fairview_students = Student.active.find(:all, :conditions => "school_id = 2", :order => "last_name")
 
     respond_to do |format|
       format.html # index.html.erb

@@ -10,7 +10,7 @@ class Student < ActiveRecord::Base
   
   validates_presence_of :first_name, :last_name, :school_id, :rank
   
-  scope :active, where(:inactive => false)
+  scope :active, where(:active => true)
   
   def classes_needed_to_test()
     delta_classes = number_of_classes_since_last_test()

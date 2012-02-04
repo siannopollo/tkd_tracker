@@ -9,4 +9,4 @@ one:
   email_address: bobby@example.com
   phone: 
   school_id: 1
-  inactive: f
+  active: t
