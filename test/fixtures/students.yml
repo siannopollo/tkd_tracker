@@ -10,3 +10,6 @@ one:
   phone: 
   school_id: 1
   active: t
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  

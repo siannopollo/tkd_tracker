@@ -16,15 +16,15 @@ ActiveRecord::Schema.define(:version => 20120204041231) do
   create_table "attendances", :force => true do |t|
     t.integer  "student_id"
     t.integer  "number_of_classes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.date     "date"
   end
 
   create_table "schools", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "students", :force => true do |t|
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(:version => 20120204041231) do
     t.integer  "school_id"
     t.string   "email_address"
     t.string   "phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "phone_two"
     t.string   "parent_name"
     t.boolean  "active",        :default => true
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(:version => 20120204041231) do
     t.date     "date"
     t.string   "result"
     t.string   "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "tester"
   end
 

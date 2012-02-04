@@ -2,6 +2,8 @@
 
 one:
   id: 1
-  name: 
+  name: Ned's TKD
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 

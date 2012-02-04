@@ -3,4 +3,6 @@ one:
   student_id: 1
   number_of_classes: 2
   date: <%= Date.today %>
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
   
