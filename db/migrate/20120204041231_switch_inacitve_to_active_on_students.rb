@@ -8,7 +8,8 @@ class SwitchInacitveToActiveOnStudents < ActiveRecord::Migration
   
   def down
     rename_column :students, :active, :inactive
-    Student.update_all "inactive = !inactive"
+    Student.reset_column_information
+    Student.find_each {|s| s.update_column :inactive, !s.inactive}
     change_column_default :students, :active, false
   end
 end
