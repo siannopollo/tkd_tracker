@@ -10,7 +10,7 @@
 	<p style="color: green;"><%= flash[:notice] %></p>
 <% end %>
 
-<% form_for(@student) do |f| %>
+<%= form_for(@student) do |f| %>
  <table>
  <tr>	 
   <td><b><%= f.label :first_name%>:</td>

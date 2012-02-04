@@ -4,7 +4,7 @@
 
 <p style="color: red"><%= flash[:error] %></p>
 
-<% form_tag("/reports/test_eligibility", :method=>'post') do %>
+<%= form_tag("/reports/test_eligibility", :method=>'post') do %>
 <table>
 	<tr>
 	<td><%= label_tag("Enter Test Date:") %></td>
