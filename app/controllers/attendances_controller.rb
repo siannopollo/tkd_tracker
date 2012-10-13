@@ -1,3 +1,5 @@
+require 'school'
+
 class AttendancesController < ApplicationController
   before_filter :authenticate, :only => [:create, :update, :destroy]
   after_filter :logged_out, :only => [:create, :update, :destroy]
@@ -6,8 +8,10 @@ class AttendancesController < ApplicationController
   # GET /attendances
   # GET /attendances.xml
   def index
-    @opendoor_students = Student.active.find(:all, :conditions => "school_id = 1", :order => "last_name")
-    @fairview_students = Student.active.find(:all, :conditions => "school_id = 2", :order => "last_name")
+    school_id = params[:param1]
+    @school_name = School.where(:id => school_id).first.name
+
+    @students = Student.where(:active => true, :school_id => school_id).order("last_name")
 
     respond_to do |format|
       format.html # index.html.erb

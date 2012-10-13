@@ -1,4 +1,3 @@
-<%= image_tag 'TKDwebLine.jpg' %><br>
 <h1>Attendance</h1>
 
 
@@ -10,7 +9,7 @@
 	}
 </script>
 
-<h2>OpenDoor TaeKwonDo</h2>
+<h2><%= @school_name %></h2>
 <div id="tableContainer" class="tableContainer">
 <table class="scrollTable">
   <thead class="fixedHeader">
@@ -20,21 +19,25 @@
 	  <th>Class<br/>2</th>
 	  <th>Class<br/>3</th>
 	  <th>Class<br/>4</th>
-	  <th>Classes <br/>til test</th>
+      <th>Total Req. Classes</th>
+      <th>Since last<br>test</th>
+	  <th>Classes til test</th>
 	  <th>Eligible to<br/>test</th>
 	  </tr>
   </thead>
 
 <tbody class="scrollContent">
-	<% for student in @opendoor_students %>
+	<% for student in @students %>
 	  <tr>
 	    <td align='left'><%= student.last_name%>, <%=student.first_name %></td>
 	    <td id=<%= "TD_class1_#{student.id}" %> align='center'><%= check_box("student#{student.id}", 'class_one', {:class => 'bigcheckbox', :onclick =>"switchColor('TD_class1_#{student.id}', this)"}) %></td>
 	    <td id=<%= "TD_class2_#{student.id}" %> align='center'><%= check_box("student#{student.id}", 'class_two', {:class => 'bigcheckbox', :onclick =>"switchColor('TD_class2_#{student.id}', this)"}) %></td>
 	    <td id=<%= "TD_class3_#{student.id}" %> align='center'><%= check_box("student#{student.id}", 'class_three', {:class => 'bigcheckbox', :onclick =>"switchColor('TD_class3_#{student.id}', this)"}) %></td>
 		<td id=<%= "TD_class4_#{student.id}" %> align='center'><%= check_box("student#{student.id}", 'class_four', {:class => 'bigcheckbox', :onclick =>"switchColor('TD_class4_#{student.id}', this)"}) %></td>
+        <td align='center'><%= student.total_classes_needed_for_next_test %></td>
+        <td align='center'><%= student.number_of_classes_since_last_test %></td>
 		<td align='center'><%= student.classes_needed_to_test %></td>
-		<td align='center'><%= student.earliest_eligible_test_date %></td>
+		<td align='center'><%= Time.parse(student.earliest_eligible_test_date.to_s).strftime("%Y-%b-%d") %></td>
 	  </tr>
 	<% end %>
 	<tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
@@ -43,40 +46,7 @@
 </table>
 </div>
 
-<br>
 
-<h2>Fairview TaeKwonDo</h2>
-<div id="tableContainer" class="tableContainer" >
-<table class="scrollTable" >
-<thead class="fixedHeader">
-  <tr>
-  <th>Student</th>
-  <th>Class<br/>1</th>
-  <th>Class <br/>2</th>
-  <th>Class<br/>3</th>
-  <th>Class<br/>4</th>
-  <th>Classes <br/>til test</th>
-  <th>Eligible to<br/>test</th>
-  </tr>
- </thead>
-
-<tbody class="scrollContent">
-	<% for student in @fairview_students %>
-	  <tr>
-	    <td align='left'><%= student.last_name%>, <%=student.first_name %></td>
-	    <td id=<%= "TD_class1_#{student.id}" %> align='center'><%= check_box("student#{student.id}", 'class_one', {:class => 'bigcheckbox', :onclick =>"switchColor('TD_class1_#{student.id}', this)"}) %></td>
-	    <td id=<%= "TD_class2_#{student.id}" %> align='center'><%= check_box("student#{student.id}", 'class_two', {:class => 'bigcheckbox', :onclick =>"switchColor('TD_class2_#{student.id}', this)"}) %></td>
-	    <td id=<%= "TD_class3_#{student.id}" %> align='center'><%= check_box("student#{student.id}", 'class_three', {:class => 'bigcheckbox', :onclick =>"switchColor('TD_class3_#{student.id}', this)"}) %></td>
-		<td id=<%= "TD_class4_#{student.id}" %> align='center'><%= check_box("student#{student.id}", 'class_four', {:class => 'bigcheckbox', :onclick =>"switchColor('TD_class4_#{student.id}', this)"}) %></td>
-		<td align='center'><%= student.classes_needed_to_test %></td>
-		<td align='center'><%= student.earliest_eligible_test_date %></td>
-	  </tr>
-	<% end %>
-	<tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-	<tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-</tbody>
-</table>	
-</div>
 
 
 

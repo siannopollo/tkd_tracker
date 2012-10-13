@@ -1,6 +1,13 @@
 require 'student'
 
 class ReportsController < ApplicationController
+
+  def show
+    report_method = params[:param1]
+      test_eligibility
+      render("test_eligibility")
+  end
+
   def test_eligibility
 
       @schools = School.find(:all, :order => "name")

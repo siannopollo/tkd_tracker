@@ -3,8 +3,9 @@ TkdTracker::Application.routes.draw do
   resources :students
   resources :attendances
   resources :schools
-  
-  root :to => 'attendances#index'
+  resources :reports
+
+  root :to => 'entry_page#index'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

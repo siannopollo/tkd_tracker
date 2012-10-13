@@ -41,8 +41,23 @@ class Student < ActiveRecord::Base
     
     return true
   end
-   
-def is_valid?(errors)
+
+  def total_classes_needed_for_next_test()
+    TestingRequirements.by_gup[rank - 1]["classes"]
+  end
+
+  def number_of_classes_since_last_test()
+    class_count = 0;
+    attendances.each do |attendance|
+      if attendance.date > last_test then
+        class_count += attendance.number_of_classes
+      end
+    end
+    return class_count
+  end
+
+
+  def is_valid?(errors)
     if !has_value?(first_name) || !has_value?(last_name) then
         errors << "A first and last name are required."
     end
@@ -67,17 +82,6 @@ def is_valid?(errors)
   def assign_default_last_test_date
     self.last_test ||= Date.today
   end
-  
-  def number_of_classes_since_last_test()
-    class_count = 0;
-    attendances.each do |attendance|
-      if attendance.date > last_test then
-        class_count += attendance.number_of_classes
-      end
-    end
-    return class_count
-  end
- 
 
  def has_value?(param)
    param && !param.blank?
