@@ -13,10 +13,8 @@ class AttendancesController < ApplicationController
 
     @students = Student.where(:active => true, :school_id => school_id).order("last_name")
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @attendances }
-    end
+    render :index
+
   end
 
   # GET /attendances/1
