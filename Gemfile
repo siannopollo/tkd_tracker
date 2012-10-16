@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
 gem 'rails', '3.2.1'
 
 # Bundle edge Rails instead:
@@ -37,6 +38,10 @@ gem 'calendar_date_select', :git => 'git://github.com/paneq/calendar_date_select
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :development do
+  gem 'sqlite3'
+end
 
 group :test do
   gem 'rspec-rails', '~> 2.8.1'
