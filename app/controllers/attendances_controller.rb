@@ -49,11 +49,14 @@ class AttendancesController < ApplicationController
   def create
     @students = Student.active.order('last_name')
     @students.each do |student|
-      num_classes = 0
-      params["student#{student.id}"].each {|key, value|
-        num_classes += value.to_i();
-      }
-      student.attendances.create :number_of_classes => num_classes if num_classes > 0
+
+      if params["student#{student.id}"]
+        num_classes = 0
+        params["student#{student.id}"].each {|key, value|
+          num_classes += value.to_i();
+        }
+        student.attendances.create :number_of_classes => num_classes if num_classes > 0
+      end
     end
     
     respond_to do |format|
