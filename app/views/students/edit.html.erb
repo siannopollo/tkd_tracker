@@ -1,3 +1,5 @@
+<%= javascript_include_tag "prototype" %>
+<%= calendar_date_select_includes %>
 <%= image_tag 'TKDwebLine.jpg' %><br>
 <h1>Editing student</h1>
 
@@ -19,9 +21,14 @@
  </tr>
   
   <tr>
-  <td><b><%= f.label :rank%>:</b></td>
+  <td><b><%= f.label :rank %>:</b></td>
    <td><%= f.select("rank",  GupNames.for_html_select);%></td>
  </tr>
+
+   <tr>
+     <td><b><%= f.label :last_test %>:</b></td>
+     <td><%= calendar_date_select_tag "last_test" %></td>
+   </tr>
   
   <tr>
   <td><b><%= f.label :email_address%>:</b></td>
