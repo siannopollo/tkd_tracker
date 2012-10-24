@@ -1,9 +1,12 @@
+
 class TkdTest < ActiveRecord::Base
-    belongs_to :student
-  
-  def after_initialize
-    if @date == nil then
-      @date = Date.today
-    end
+  belongs_to :student
+#  validates_presence_of :date
+
+  after_initialize :assign_default_values
+
+  def assign_default_values
+    self.date ||= Date.today
   end
+
 end

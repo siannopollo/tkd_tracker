@@ -3,90 +3,88 @@
 <%= image_tag 'TKDwebLine.jpg' %><br>
 <h1>Editing student</h1>
 
-<%= form_for(@student) do |f| %>
- <table>
- <tr>	
-  <td><b><%= f.label :first_name%>:</b></td>
-  <td><%= f.text_field :first_name%></td>
- </tr>
- 
- <tr> 
-  <td><b><%= f.label :last_name%>:</b></td>
-  <td><%= f.text_field :last_name %></td>
- </tr>
-  
-  <tr>
-  <td><b><%= label_tag("School:") %></b></td>
-  <td><%= collection_select(:student, :school_id, School.find(:all), :id, :name, {:selected => @student.school_id}) %></td>
- </tr>
-  
-  <tr>
-  <td><b><%= f.label :rank %>:</b></td>
-   <td><%= f.select("rank",  GupNames.for_html_select);%></td>
- </tr>
+<table><tr><td>
+    <%= form_for(@student) do |f| %>
+     <table>
+     <tr>
+      <td><b><%= f.label :first_name%>:</b></td>
+      <td><%= f.text_field :first_name%></td>
+     </tr>
 
-   <tr>
-     <td><b><%= f.label :last_test %>:</b></td>
-     <td><%= calendar_date_select_tag "last_test" %></td>
-   </tr>
-  
-  <tr>
-  <td><b><%= f.label :email_address%>:</b></td>
-  <td><%= f.text_field :email_address %></td>
- </tr>
-  
-  <tr>
-  <td><b><%= f.label :phone%>:</b></td>
-  <td><%= f.text_field :phone%></td>
- </tr>
- 
-  <tr>
-  <td><b><%= f.label("Secondary Phone")%>:</b></td>
-  <td><%= f.text_field :phone_two%></td>
- </tr>
- 
-   <tr>
-  <td><b><%= f.label("Parent Name")%>:</b></td>
-  <td><%= f.text_field :parent_name%></td>
- </tr>
-  
-  <tr>
-  <td><b><%= label_tag("Add Classes:") %></b></td> 
-  <td><input name="number_of_classes" type="text" /></td>
-  </tr>
-  
-  <tr>
-  	<td><b><%= f.label :active %></b></td>
-  	<td><%= f.check_box :active %></td>
-  </tr>
+     <tr>
+      <td><b><%= f.label :last_name%>:</b></td>
+      <td><%= f.text_field :last_name %></td>
+     </tr>
 
+      <tr>
+      <td><b><%= label_tag("School:") %></b></td>
+      <td><%= collection_select(:student, :school_id, School.find(:all), :id, :name, {:selected => @student.school_id}) %></td>
+     </tr>
 
-	<% fields_for :test do |test_fields| %> 
-	<table BORDER=10 RULES=NONE FRAME=BOX cellpadding=10>
-		<tr><td><b>Add Testing Result</b></td><td>&nbsp</td></tr>
-		<tr>
-			<td>Result (required)</td>
-			<td><%= select(:test, :result, [["Passed","passed"],["Reccommended","reccommended"],["Retest","retest"],["Fail","fail"]], {:prompt => " "}) %></td>
-		</tr>
-		<tr>
-			<td>Tester</td>
-			<td><%= text_field :test, :tester %></td>
-		</tr>
-			
-		<tr>
-			<td>Comments</td>
-			<td><%= text_area(:test, :comments, :cols => 20, :rows => 5)%></td>
-		</tr>
-	</table>
-	<% end %>
+      <tr>
+      <td><b><%= f.label :rank %>:</b></td>
+       <td><%= f.select("rank",  GupNames.for_html_select);%></td>
+     </tr>
 
-</table>
-  <p>
-    <%= f.submit "Update Student Record" %>
-  </p>
+      <tr>
+      <td><b><%= label_tag("Add Classes:") %></b></td>
+      <td><input name="number_of_classes" type="text" /></td>
+      </tr>
+
+      <tr>
+        <td><b><%= f.label :active %></b></td>
+        <td><%= f.check_box :active %></td>
+      </tr>
+
+    </table>
+      <p>
+        <%= f.submit "Update Student Record" %>
+      </p>
+    <% end %>
+</td>
+<td width="20%">&nbsp</td>
+<td valign='top' >
+    <%= form_for(@test) do |t| %>
+    <table border='1'><tr><td>
+      <table>
+          <tr><td><h2>Add Test</h2></td></tr>
+          <tr>
+            <td><b><%= t.label("date") %>:</b></td>
+            <td><%= calendar_date_select_tag "date"%></td>
+          </tr>
+
+          <tr>
+            <td><b><%= t.label("Tested For") %>:</b></td>
+            <td><%=  t.select("test_for",  GupNames.for_html_select); %></td>
+          </tr>
+
+          <tr>
+            <td><b><%= t.label("Result") %>:</b></td>
+            <td><%=  t.select("result",  ["passed", "improvements needed", "recommended", "fail"]); %></td>
+          </tr>
+
+          <tr>
+            <td><b><%= t.label("Tester") %>:</b></td>
+            <td><%=  t.text_field :tester; %></td>
+          </tr>
+
+          <tr>
+            <td><b><%= t.label("Comments") %>:</b></td>
+            <td><%=  t.text_area(:comments, :size => '35x6'); %></td>
+          </tr>
+
+         <tr>
+          <td><%= t.hidden_field :student_id, :value => @student.id %></td>
+         </tr>
+
+          <tr><td><%= t.submit "Add Test" %></td></tr>
+      </table>
+    </td></tr></table>
 <% end %>
+</td>
+</tr></table>
 
-<% if @student.attendances.length > 0 then %>
+
 	<div style='float:left;'>
 	  <h2>Attendances</h2>
 	  <table border='2' style='margin-right:1em'>
@@ -96,34 +94,34 @@
 	  	  </tr>
 		  <% for attendance in @student.attendances%>
 		  	<tr style="background-color:<%=cycle('lightblue', 'white')%>">
-		  		<td><%= attendance.date %></td>
+		  		<td><%= Time.parse(attendance.date.to_s).strftime("%Y-%b-%d") %></td>
 				<td><%= attendance.number_of_classes%></td>
 		  	</tr>
 		  <% end %>
 	  </table>
 	</div>
-<% end %> 
 
 
-<% if @student.tests.length > 0 then %>
+
 	<div style='float:left;'>
 	  <h2>Tests</h2>
 	  <table border='2' >
 
 	  	  <tr>
 	  	  	<td align='center'><b>Date</b></td>
+            <td align='center'><b>Tested For</b></td>
+            <td align='center'><b>Result</b></td>
 			<td align='center'><b>Tester</b></td>
-			<td align='center'><b>Result</b></td>
 			<td align='center'><b>Comments</b></td>
 	  	  </tr>
 		  <% for test in @student.tests%>
 		  	<tr style="background-color:<%=cycle('lightblue', 'white')%>">
-		  		<td valign='top'><%= test.date %></td>
-				<td valign='top'><%= test.tester %></td>
-				<td valign='top'><%= test.result %></td>
-				<td valign='top' style='width:30em;height:4em'><%= test.comments %></td>
+		  		<td valign='middle'><%= Time.parse(test.date.to_s).strftime("%Y-%b-%d") %></td>
+                <td valign='middle'><%= test.test_for %></td>
+                <td valign='middle'><%= test.result %></td>
+				<td valign='middle'><%= test.tester %></td>
+				<td valign='top' style='width:20em;height:4em'><%= test.comments %></td>
 		  	</tr>
 		  <% end %>
 	  </table>
-	</div> 
-<% end %> 	
+	</div>

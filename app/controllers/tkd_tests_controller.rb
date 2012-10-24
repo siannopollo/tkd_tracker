@@ -40,11 +40,11 @@ class TkdTestsController < ApplicationController
   # POST /tests
   # POST /tests.xml
   def create
-    @test = TkdTest.new(params[:test])
+    @test = TkdTest.new(params[:tkd_test])
 
     respond_to do |format|
       if @test.save
-        format.html { redirect_to(@test, :notice => 'Test was successfully created.') }
+        format.html { redirect_to(:back, :notice => 'Test was successfully created.') }
         format.xml  { render :xml => @test, :status => :created, :location => @test }
       else
         format.html { render :action => "new" }

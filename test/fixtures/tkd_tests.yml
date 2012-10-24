@@ -5,19 +5,10 @@
 # below each fixture, per the syntax in the comments below
 #
 test_one:
-  student_id:
-  date:
-  result:
-  comments:
-  created_at: <%= Time.now %>
-  updated_at: <%= Time.now %>
-  tester:
-  
-test_two:
-  student_id:
-  date:
-  result:
-  comments:
+  student_id:  1
+  date:  <%= Time.now %>
+  result: "passed"
+  comments:  "initialized"
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
   tester:

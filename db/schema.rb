@@ -11,45 +11,55 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120204041231) do
+ActiveRecord::Schema.define(:version => 20121021030100) do
 
   create_table "attendances", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "number_of_classes"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.date     "date"
+    t.integer   "student_id"
+    t.integer   "number_of_classes"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.date      "date"
   end
 
   create_table "schools", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string    "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "students", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "rank",          :default => 10
-    t.date     "last_test"
     t.integer  "school_id"
     t.string   "email_address"
     t.string   "phone"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "phone_two"
     t.string   "parent_name"
     t.boolean  "active",        :default => true
   end
 
+  create_table "tests", :force => true do |t|
+    t.integer   "student_id"
+    t.date      "date"
+    t.string    "result"
+    t.string    "comments"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "tester"
+  end
+
   create_table "tkd_tests", :force => true do |t|
-    t.integer  "student_id"
-    t.date     "date"
-    t.string   "result"
-    t.string   "comments"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "tester"
+    t.integer   "student_id"
+    t.date      "date"
+    t.string    "result"
+    t.string    "comments"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "tester"
+    t.string    "test_for"
   end
 
 end

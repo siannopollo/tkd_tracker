@@ -1,3 +1,4 @@
+
 class StudentsController < ApplicationController
   before_filter :authenticate, :only => [:create, :edit, :update, :destroy]
   after_filter :logged_out, :only => [:destroy]
@@ -38,6 +39,7 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
+    @test = TkdTest.new();
   end
 
   # POST /students
@@ -77,15 +79,7 @@ class StudentsController < ApplicationController
       attendance.number_of_classes = params[:number_of_classes]
       attendance.date = Date.today
       attendance.save
-      flash[:notice] = 'Student was successfully updated.'
     end
-    
-    test = TkdTest.new(params[:test])
-    if (test.result != nil && test.result.length != 0) then
-      test.date = Date.today
-      @student.tests << test
-      @student.last_test = test.date
-    end   
 
     respond_to do |format|
       if @student.update_attributes(params[:student])

@@ -24,11 +24,6 @@ class StudentTest < ActiveSupport::TestCase
     
   end
   
-  test "new student should be ineligible to test" do
-    student = Student.new
-    assert(!student.is_eligible_to_test(Date.today));
-  end
-  
   test "white belt ineligible to test because of testing date" do
     @white_belt.last_test = Date.civil(2010, 1, 6)
     @attendance.number_of_classes = 28
