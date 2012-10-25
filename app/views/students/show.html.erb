@@ -58,7 +58,7 @@
 		  <% for test in @student.tests%>
 		  	<tr style="background-color:<%=cycle('lightblue', 'white')%>">
 		  		<td><%= Time.parse(test.date.to_s).strftime("%Y-%b-%d") %></td>
-                <td><%= test.test_for %></td>
+                <td><%= GupNames.by_gup[test.test_for] %></td>
                 <td><%= test.result %></td>
 		  	</tr>
 		  <% end %>
