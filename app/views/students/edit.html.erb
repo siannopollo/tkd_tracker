@@ -117,7 +117,7 @@
 		  <% for test in @student.tests%>
 		  	<tr style="background-color:<%=cycle('lightblue', 'white')%>">
 		  		<td valign='middle'><%= Time.parse(test.date.to_s).strftime("%Y-%b-%d") %></td>
-                <td valign='middle'><%= test.test_for %></td>
+                <td valign='middle'><%= GupNames.by_gup[test.test_for] %></td>
                 <td valign='middle'><%= test.result %></td>
 				<td valign='middle'><%= test.tester %></td>
 				<td valign='top' style='width:20em;height:4em'><%= test.comments %></td>

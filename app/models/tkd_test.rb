@@ -7,6 +7,7 @@ class TkdTest < ActiveRecord::Base
 
   def assign_default_values
     self.date ||= Date.today
+    self.test_for ||= 10
   end
 
 end

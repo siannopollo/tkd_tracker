@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021030100) do
+ActiveRecord::Schema.define(:version => 20121025011235) do
 
   create_table "attendances", :force => true do |t|
     t.integer   "student_id"
@@ -28,17 +28,17 @@ ActiveRecord::Schema.define(:version => 20121021030100) do
   end
 
   create_table "students", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "rank",          :default => 10
-    t.integer  "school_id"
-    t.string   "email_address"
-    t.string   "phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "phone_two"
-    t.string   "parent_name"
-    t.boolean  "active",        :default => true
+    t.string    "first_name"
+    t.string    "last_name"
+    t.integer   "rank",          :default => 10
+    t.integer   "school_id"
+    t.string    "email_address"
+    t.string    "phone"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "phone_two"
+    t.string    "parent_name"
+    t.boolean   "active",        :default => true
   end
 
   create_table "tests", :force => true do |t|
@@ -52,14 +52,14 @@ ActiveRecord::Schema.define(:version => 20121021030100) do
   end
 
   create_table "tkd_tests", :force => true do |t|
-    t.integer   "student_id"
-    t.date      "date"
-    t.string    "result"
-    t.string    "comments"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "tester"
-    t.string    "test_for"
+    t.integer  "student_id"
+    t.date     "date"
+    t.string   "result"
+    t.string   "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "tester"
+    t.integer  "test_for",   :limit => 255
   end
 
 end
