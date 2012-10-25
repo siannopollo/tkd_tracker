@@ -1,6 +1,8 @@
 class ChangeTestForTypeAndMigrateData < ActiveRecord::Migration
   def up
-    change_column :tkd_tests, :test_for, :integer
+
+    remove_column :tkd_tests, :test_for
+    add_column :tkd_tests, :test_for, :integer
 
     Student.all.each do |student|
       test = TkdTest.find_all_by_student_id(student.id).first
@@ -10,7 +12,9 @@ class ChangeTestForTypeAndMigrateData < ActiveRecord::Migration
   end
 
   def down
-    change_column :tkd_tests, :test_for, :string
+    remove_column :tkd_tests, :test_for
+    add_column :tkd_tests, :test_for, :string
+
     TkdTest.all.each do |test|
       test.test_for = nil
       test.save
