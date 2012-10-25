@@ -84,7 +84,7 @@ def make_student_valid
   if (tests.length == 0)
     test = TkdTest.new
     test.date = Date.today
-    test.test_for = 10
+    test.test_for = rank
     test.student_id = id
     test.save
   end
