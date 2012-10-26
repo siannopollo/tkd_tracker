@@ -59,7 +59,7 @@ class TkdTestsController < ApplicationController
     @test = TkdTest.find(params[:id])
 
     respond_to do |format|
-      if @test.update_attributes(params[:test])
+      if @test.update_attributes(params[:tkd_test])
         format.html { redirect_to(@test, :notice => 'Test was successfully updated.') }
         format.xml  { head :ok }
       else

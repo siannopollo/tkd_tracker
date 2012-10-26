@@ -1,11 +1,36 @@
+<%= javascript_include_tag "prototype" %>
+<%= calendar_date_select_includes %>
+
 <%= image_tag 'TKDwebLine.jpg' %><br>
 <h1>Editing test</h1>
 
-<%= form_for(@test) do |f| %>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+<%= form_for(@test) do |t| %>
+      <table>
+        <tr>
+          <td><b><%= t.label("date") %>:</b></td>
+          <td><%= calendar_date_select_tag "tkd_test[date]", @test.date %></td>
+        </tr>
 
-<%= link_to 'Show', @test %> |
-<%= link_to 'Back', tkd_tests_path %>
+        <tr>
+          <td><b><%= t.label("Tested For") %>:</b></td>
+          <td><%=  t.select("test_for",  GupNames.for_html_select, :selected => @test.test_for); %></td>
+        </tr>
+
+        <tr>
+          <td><b><%= t.label("Result") %>:</b></td>
+          <td><%=  t.select("result",  ["passed", "improvements needed", "recommended", "fail"], :selected => @test.result); %></td>
+        </tr>
+
+        <tr>
+          <td><b><%= t.label("Tester") %>:</b></td>
+          <td><%=  t.text_field :tester %></td>
+        </tr>
+
+        <tr>
+          <td><b><%= t.label("Comments") %>:</b></td>
+          <td><%=  t.text_area(:comments, :size => '35x6', :value => @test.comments); %></td>
+        </tr>
+
+        <tr><td><%= t.submit "Save" %></td></tr>
+      </table>
+<% end %>

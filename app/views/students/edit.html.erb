@@ -50,7 +50,7 @@
           <tr><td><h2>Add Test</h2></td></tr>
           <tr>
             <td><b><%= t.label("date") %>:</b></td>
-            <td><%= calendar_date_select_tag "date"%></td>
+            <td><%= calendar_date_select_tag "tkd_test[date]"%></td>
           </tr>
 
           <tr>
@@ -108,6 +108,7 @@
 	  <table border='2' >
 
 	  	  <tr>
+            <td>&nbsp</td>
 	  	  	<td align='center'><b>Date</b></td>
             <td align='center'><b>Tested For</b></td>
             <td align='center'><b>Result</b></td>
@@ -116,6 +117,7 @@
 	  	  </tr>
 		  <% for test in @student.tests%>
 		  	<tr style="background-color:<%=cycle('lightblue', 'white')%>">
+                <td valign='middle'><%= link_to "Edit", edit_tkd_test_path(test) %></td>
 		  		<td valign='middle'><%= Time.parse(test.date.to_s).strftime("%Y-%b-%d") %></td>
                 <td valign='middle'><%= GupNames.by_gup[test.test_for] %></td>
                 <td valign='middle'><%= test.result %></td>
