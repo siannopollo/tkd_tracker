@@ -10,7 +10,6 @@ class Student < ActiveRecord::Base
   belongs_to :school
 
   validates_presence_of :first_name, :last_name, :school_id, :rank
-  #validates_length_of :tests, :minimum=>1, :too_short => "Student does not have any tests, there must be at least one"
 
   scope :active, where(:active => true)
 
@@ -51,12 +50,14 @@ class Student < ActiveRecord::Base
   end
 
   def number_of_classes_since_last_test()
-    class_count = 0;
+    class_count = 0
+
     attendances.each do |attendance|
       if attendance.date > tests.first.date then
         class_count += attendance.number_of_classes
       end
     end
+
     return class_count
   end
 

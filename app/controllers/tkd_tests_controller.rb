@@ -1,3 +1,6 @@
+require 'school'
+require 'student'
+
 class TkdTestsController < ApplicationController
   # GET /tests
   # GET /tests.xml
@@ -78,6 +81,30 @@ class TkdTestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(:action => :index) }
       format.xml  { head :ok }
+    end
+  end
+
+  def create_multiple
+    @schools = Array.new
+
+    School.all.each do |school|
+      @schools << school
+    end
+
+    respond_to do |format|
+      format.html {render :action => "edit_multiple"}
+    end
+  end
+
+  def show_multiple
+    @schools = Array.new
+
+    School.all.each do |school|
+      @schools << school
+    end
+
+    respond_to do |format|
+      format.html {render :action => "show_multiple"}
     end
   end
 end

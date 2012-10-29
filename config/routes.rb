@@ -1,9 +1,17 @@
 TkdTracker::Application.routes.draw do
-  resources :tkd_tests
+
+
   resources :students
   resources :attendances
   resources :schools
   resources :reports
+
+  resources :tkd_tests do
+    collection do
+      post :create_multiple
+      get :show_multiple
+    end
+  end
 
   root :to => 'entry_page#index'
   
