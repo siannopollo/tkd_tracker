@@ -2,6 +2,8 @@ require 'school'
 require 'student'
 
 class TkdTestsController < ApplicationController
+  before_filter :authenticate, :only => [:create, :edit, :update, :destroy, :create_multiple]
+
   # GET /tests
   # GET /tests.xml
   def index
@@ -85,19 +87,35 @@ class TkdTestsController < ApplicationController
   end
 
   def create_multiple
-    @schools = Array.new
+    test_date = params[:test_date]
+    students = params[:students]
+    students_updated = 0
 
-    School.all.each do |school|
-      @schools << school
+    students.each do |student|
+      if (!(student[1][:test_for].blank?) && !(student[1][:result].blank?))
+        tkdtest = TkdTest.new(student[1])
+        tkdtest.student_id = student[0]
+        tkdtest.date = test_date
+        tkdtest.save
+        students_updated += 1
+      end
     end
 
     respond_to do |format|
-      format.html {render :action => "edit_multiple"}
+      format.html {
+        redirect_to(:back, :notice => "Successfully added test results to #{students_updated} students")
+      }
     end
   end
 
   def show_multiple
     @schools = Array.new
+    @active_black_belt_names_for_select = Array.new
+
+    Student.where("rank < 1 and active = 't'").order("last_name ASC").each do |black_belt|
+      @active_black_belt_names_for_select << ["#{black_belt.last_name}, #{black_belt.first_name}", "#{black_belt.last_name}, #{black_belt.first_name}"]
+    end
+
 
     School.all.each do |school|
       @schools << school

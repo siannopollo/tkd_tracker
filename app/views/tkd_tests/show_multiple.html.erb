@@ -2,15 +2,18 @@
 <%= calendar_date_select_includes %>
 
 <%= image_tag 'TKDwebLine.jpg' %><br>
-<h1>Bulk Test Entry</h1>
+<h1>Enter Multiple Test Results</h1>
+
+<p style="color: green"><%= notice %></p>
 
 <%= form_tag("create_multiple", :method=>'post', :id => 'tkd_tests_sets_form') do %>
-    <%= select_tag "school_select", options_from_collection_for_select(@schools, "name", "name"), :prompt => "Choose School"  %>
-    <%= label_tag("Enter Test Date:") %>
-    <%= calendar_date_select_tag "test_date" %>
-    <%= submit_tag "Save Tests" %>
+    <%= select_tag "school_select", options_from_collection_for_select(@schools, "id", "name"), :prompt => "Choose School"  %>
+    <%= submit_tag "Save Tests", :id => "save_tests" %>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<font color="red">*</font> - required to register test for student <br>
+    <font color="red">*</font>&nbsp<%= label_tag("Test Date:") %>
+    <%= calendar_date_select_tag "test_date", Date.today %>
     <% @schools.each do |school| %>
-        <div id="<%=  school.name %>" >
+        <div id="<%=  school.id %>" >
           <table>
             <thead>
             <tr>
@@ -23,11 +26,11 @@
             </thead>
             <% school.students.each do |student| %>
                 <% if student.active && (student.rank > 1) %>
-                    <tr>
-                      <td  valign="top"><%= "#{student.last_name}, #{student.first_name}" %></td>
-                      <td  valign="top"><%= select_tag("students[#{student.id}][test_for]",  options_for_select(GupNames.for_html_select), {:include_blank => true}) %></td>
-                      <td  valign="top"><%= select_tag("students[#{student.id}][result]",  options_for_select([["passed","passed"], ["improvements needed","improvements needed"], ["recommended","recommended"], ["fail","fail"]]), {:include_blank => true}) %></td>
-                      <td  valign="top"><%= text_field_tag "students[#{student.id}][tester]" %></td>
+                    <tr style="background-color:<%=cycle('lightblue', 'white')%>">
+                      <td><%= "#{student.last_name}, #{student.first_name}" %></td>
+                      <td><font color="red">*</font><%= select_tag("students[#{student.id}][test_for]",  options_for_select(GupNames.for_html_select), {:include_blank => true}) %></td>
+                      <td><font color="red">*</font><%= select_tag("students[#{student.id}][result]",  options_for_select([["passed","passed"], ["improvements needed","improvements needed"], ["recommended","recommended"], ["fail","fail"]]), {:include_blank => true}) %></td>
+                      <td><%=select_tag("students[#{student.id}][tester]", options_for_select(@active_black_belt_names_for_select), {:include_blank => true} )%></td>
                       <td  valign="top"><%= text_area_tag "students[#{student.id}][comments]", nil, :rows => 4, :cols => 40 %></td>
                     </tr>
                 <% end %>
@@ -38,12 +41,29 @@
 <% end %>
 
 <script type="text/javascript">
-    Event.observe('school_select', 'change', function(event) {
-        alert( "got here")
-        <% @schools.each do |school| %>
-         $('<%= school.name %>').hide()
+
+    Event.observe(window, 'load', function(event){
+         <% @schools.each  do |school|%>
+         $('<%= school.id %>').hide()
         <% end %>
-        var schoolName = event.target.getValue()
-        if (!schoolName.blank()) $(schoolName).show() // Finds the selected school div and shows it, unless the value is blank
+        $('save_tests').disable()
+        $('test_date').disable()
+    })
+
+    Event.observe('school_select', 'change', function(event) {
+        <% @schools.each do |school| %>
+
+         $('<%= school.id %>').hide()
+        <% end %>
+        var school_id = event.target.getValue()
+        if (school_id.blank()) {
+            $('save_tests').disable()
+            $('test_date').disable()
+        } else {
+            $(school_id).show()
+            $('save_tests').enable()
+            $('test_date').enable()
+        }
+
     })
 </script>
