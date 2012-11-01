@@ -65,7 +65,7 @@
 
           <tr>
             <td><b><%= t.label("Tester") %>:</b></td>
-            <td><%=  t.text_field :tester; %></td>
+            <td><%= select_tag("tkd_test[tester]", options_for_select(@active_black_belt_names_for_select), {:include_blank => true} ) %></td>
           </tr>
 
           <tr>

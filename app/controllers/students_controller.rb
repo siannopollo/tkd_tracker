@@ -40,6 +40,11 @@ class StudentsController < ApplicationController
   def edit
     @student = Student.find(params[:id])
     @test = TkdTest.new();
+    @active_black_belt_names_for_select = Array.new
+
+    Student.where("rank < 1 and active = 't'").order("last_name ASC").each do |black_belt|
+      @active_black_belt_names_for_select << ["#{black_belt.last_name}, #{black_belt.first_name}", "#{black_belt.last_name}, #{black_belt.first_name}"]
+    end
   end
 
   # POST /students

@@ -6,7 +6,7 @@
 <p style="color: red"><%= flash[:error] %></p>
 
 <%= form_tag("/reports/show", :method=>'get') do %>
-    <%=  hidden_field_tag("param1", "test_eligibility") %>
+    <%=  hidden_field_tag("param1", "certificate_request") %>
 <table>
 	<tr>
 	<td><%= label_tag("Enter Test Date:") %></td>
@@ -22,27 +22,26 @@
 		<% end %>
 	</select></td>
 	</tr>
-	
-	<tr>
-	<td><%= label_tag("Credit Additional Classes")%></td>
-	<td><%= text_field_tag("fudge_factor") %></td>
-	</tr>
 </table>
-	<%= submit_tag("List Eligible Students") %>
+	<%= submit_tag("Get information for certificate request") %>
 <% end %>
 
 <p><%= flash[:notice] %></p>
 
-<% if @students_eligible_to_test.length > 0 then %>
+<% if @students_that_tested.length > 0 then %>
 <table>
 	<tr>
 		<td><b>Name</b></td>
-		<td><b>Testing For</b></td>
+        <td><b>Rank Tested For</b></td>
+        <td><b>Date Tested</b></td>
+		<td><b>Instructor</b></td>
     </tr>
-	<% for student in @students_eligible_to_test %>	
+	<% @students_that_tested.each do |student| %>
 	    <tr style="background-color:<%=cycle('lightblue', 'white')%>" >
 		 <td><%= student.last_name%>, <%= student.first_name%></td>
-		 <td><%= GupNames.by_gup[student.rank - 1] %></td>
+		 <td><%= GupNames.by_gup[student.tests.first.test_for] %></td>
+          <td><%= student.tests.first.date %></td>
+          <td><%= student.tests.first.tester %></td>
 		</tr>
 	<% end %>
 <% end %>

@@ -4,8 +4,18 @@ class ReportsController < ApplicationController
 
   def show
     report_method = params[:param1]
-      test_eligibility
-      render("test_eligibility")
+    case report_method
+      when "test_eligibility"
+        test_eligibility
+        render("test_eligibility")
+      when "certificate_request"
+        certificate_request
+        render("certificate_request")
+      else
+        puts "hello"
+    end
+
+
   end
 
   def test_eligibility
@@ -36,6 +46,25 @@ class ReportsController < ApplicationController
  
     @students_eligible_to_test.sort! { |a,b| a.rank <=> b.rank}
     
+  end
+
+  def certificate_request
+    test_date = params[:test_date]
+    school_id = params[:school]
+    @students_that_tested = Array.new
+    @schools = School.all
+
+    if test_date && school_id
+      test_date = Date.parse(test_date)
+      found = TkdTest.where("date = '#{test_date}' and result = 'passed' ")
+      found.each do |test|
+          student = Student.where("id = #{test.student_id} and school_id = '#{school_id}'" ).first
+          if student
+            @students_that_tested <<  student
+          end
+      end
+    end
+
   end
   
   private
