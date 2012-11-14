@@ -87,6 +87,7 @@ def make_student_valid
     test.date = Date.today
     test.test_for = rank
     test.student_id = id
+    test.result = "passed"
     test.save
   end
 end

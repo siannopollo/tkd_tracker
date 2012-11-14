@@ -8,6 +8,8 @@ gem 'rails', '3.2.1'
 
 gem 'pg'
 
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -49,7 +51,13 @@ group :test do
   gem 'timecop', '~> 0.3.5'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'cucumber-rails', '~> 1.2.1'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'cucumber-rails', '~> 1.2.1', :require => false
   gem 'cucumber'
   gem 'launchy'
+  if RUBY_PLATFORM =~ /(win32|w32)/
+    gem "win32console", '1.3.0'
+  end
+  gem "minitest"
+  gem "minitest-reporters", '>= 0.5.0'
 end

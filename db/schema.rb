@@ -52,14 +52,14 @@ ActiveRecord::Schema.define(:version => 20121025011235) do
   end
 
   create_table "tkd_tests", :force => true do |t|
-    t.integer  "student_id"
-    t.date     "date"
-    t.string   "result"
-    t.string   "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "tester"
-    t.integer  "test_for",   :limit => 255
+    t.integer   "student_id"
+    t.date      "date"
+    t.string    "result"
+    t.string    "comments"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "tester"
+    t.integer   "test_for"
   end
 
 end
