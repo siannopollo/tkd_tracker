@@ -53,7 +53,7 @@ class Student < ActiveRecord::Base
     class_count = 0
 
     attendances.each do |attendance|
-      if attendance.date > tests.first.date then
+      if attendance.date >= tests.first.date then
         class_count += attendance.number_of_classes
       end
     end

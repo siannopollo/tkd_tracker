@@ -67,6 +67,15 @@ class StudentTest < ActiveSupport::TestCase
     assert(student.is_eligible_to_test(expected_test_date))
   end
 
+  test "classes since last test works when attendance and test dates the same" do
+    student = student_with_test_and_attendance
+    attendance = student.attendances.first
+    attendance.date = student.tests.first.date
+    attendance.number_of_classes = 10
+
+    assert_equal(attendance.number_of_classes, student.number_of_classes_since_last_test)
+  end
+
   def student_with_test_and_attendance
     student = Student.new(:rank => 10)
     student.attendances = Array.new
